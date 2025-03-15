@@ -324,7 +324,7 @@ export default function Booking({
         </div>
       </CardContent>
 
-      <CardFooter className="flex flex-col space-y-4 border-t p-4 bg-slate-50 mb-12">
+      <CardFooter className="flex flex-col space-y-4 border-t p-4 bg-slate-50 mb-24">
         {/* Pricing information - always shown but with reduced opacity when not logged in */}
         <div className={`w-full ${!isLoggedIn ? "opacity-70" : ""}`}>
           <div className="flex justify-between items-center mb-2">
