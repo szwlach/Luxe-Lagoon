@@ -44,7 +44,7 @@ export const TypewriterEffectSmooth = ({
   return (
     <div className={cn("flex space-x-1 my-6", className)}>
       {/* Surowy tekst na małych ekranach */}
-      <div className="block md:hidden text-3xl text-center sm:text-xl font-bold">
+      <div className="block md:hidden text-3xl text-center sm:text-xl font-extrabold">
         {words.map((word) => (
           <span key={word.text} className={cn(word.className)}>
             {word.text}{" "}
