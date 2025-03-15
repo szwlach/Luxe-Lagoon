@@ -237,8 +237,9 @@ export const Show = () => {
                   placeholder="Search hotels by name or location..."
                   value={searchQuery}
                   onChange={handleSearchChange}
-                  className="pl-14 py-6 text-lg border-2 border-gray-200 rounded-full focus-visible:ring-blue-500 shadow-sm"
+                  className="pl-14 pr-6 py-4 text-lg border-2 border-gray-200 rounded-full focus-visible:ring-blue-500 shadow-sm"
                 />
+
                 {searchQuery && (
                   <Button
                     onClick={() => setSearchQuery("")}

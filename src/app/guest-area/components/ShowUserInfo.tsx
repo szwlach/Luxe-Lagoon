@@ -51,7 +51,7 @@ const ShowUserInfo = ({ userData }: { userData: UserDataIntf }) => {
           onUsernameUpdate={handleUsernameUpdate}
         />
       </h1>
-      <h1 className="text-slate-200 text-3xl mt-4">Your bookings</h1>
+      {/* <h1 className="text-slate-200 text-3xl mt-4 mb-5">Your bookings</h1> */}
       <ShowBooking userId={userData.id} />
     </div>
   );

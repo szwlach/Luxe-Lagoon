@@ -134,7 +134,7 @@ export const ShowBooking = ({ userId }: { userId: string }) => {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto space-y-6">
+    <div className="w-full max-w-3xl mx-auto space-y-6 mt-12 px-1">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-slate-200">Your Bookings</h2>
         <Badge variant="outline" className="text-sm font-medium text-slate-200">

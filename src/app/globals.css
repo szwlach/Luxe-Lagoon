@@ -15,6 +15,9 @@ body {
   min-height: 100vh;
   overflow-y: auto;
 }
+input::placeholder {
+  font-size: 1rem; /* Rozmiar czcionki placeholdera (sm) */
+}
 
 @layer base {
   :root {
@@ -82,8 +85,6 @@ body {
 }
 
 /* Tailwind purge może usuwać duration-1000, więc można wymusić obecność */
-
-
 
 @layer base {
   * {
