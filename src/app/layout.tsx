@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { useEffect } from "react";
 export const metadata: Metadata = {
   title: "Welcome | Luxe Lagoon",
   description:
@@ -12,6 +13,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    const keepDatabaseAwake = async () => {
+      try {
+        const response = await fetch("/api/Refresh-db");
+        const data = await response.json();
+        console.log("Database refresh:", data);
+      } catch (error) {
+        console.error("Error refreshing database:", error);
+      }
+    };
+
+    const intervalId = setInterval(keepDatabaseAwake, 172800000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <ClerkProvider>
       <html lang="en" style={{ height: "100%", overflow: "hidden" }}>

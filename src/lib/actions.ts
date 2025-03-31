@@ -288,3 +288,12 @@ export const isSendedOpinion = async (hotelId: number, userId: string) => {
     return false;
   }
 };
+export const refreshDatabase = async () => {
+  try {
+    const hotels = await db.select().from(hotelsTable).limit(1);
+    return hotels;
+  } catch (error) {
+    console.error("Error during refreshing database:", error);
+    throw error;
+  }
+};
