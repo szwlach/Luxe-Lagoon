@@ -6,14 +6,7 @@ import {
   opinionsTable,
   usersTable,
 } from "@/db/schema";
-import { createClient } from "@supabase/supabase-js";
-import { and, eq } from "drizzle-orm";
-
-// Create Supabase client using environment variables
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { and, desc, eq } from "drizzle-orm";
 
 export const addHotel = async (
   name: string,
@@ -45,7 +38,10 @@ export const addHotel = async (
 
 export const getAllHotels = async () => {
   try {
-    const hotels = await db.select().from(hotelsTable);
+    const hotels = await db
+      .select()
+      .from(hotelsTable)
+      .orderBy(desc(hotelsTable.createdAt));
     return hotels;
   } catch (error) {
     console.error("Error fetching hotels:", error);
@@ -251,20 +247,17 @@ export const GetReviews = async (hotelId: number) => {
 };
 
 export const UpdateHotel = async (hotelId: number) => {
-  // Pobierz wszystkie oceny dla danego hotelu
   const totalRatingData = await db
     .select({ rating: opinionsTable.rating })
     .from(opinionsTable)
     .where(eq(opinionsTable.hotelId, hotelId));
 
-  // Oblicz sumę ocen
   const totalRating = totalRatingData.reduce((sum, row) => sum + row.rating, 0);
 
   await db
     .update(hotelsTable)
     .set({
       totalRating: totalRating,
-      // ratingCount: ratingCount,
     })
     .where(eq(hotelsTable.id, hotelId));
 
