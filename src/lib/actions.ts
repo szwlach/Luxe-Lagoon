@@ -7,7 +7,7 @@ import {
   usersTable,
 } from "@/db/schema";
 import { createClient } from "@supabase/supabase-js";
-import { and, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 
 // Create Supabase client using environment variables
 const supabase = createClient(
@@ -20,7 +20,7 @@ export const addHotel = async (
   description: string,
   location: string,
   pricePerNight: number,
-  imageUrl: string, // Otrzymujemy URL zamiast pliku
+  imageUrl: string,
   guests: number
 ) => {
   try {
@@ -31,7 +31,7 @@ export const addHotel = async (
         description,
         location,
         pricePerNight,
-        imageUrl, // Już gotowy URL
+        imageUrl,
         guests,
       })
       .returning();
@@ -45,7 +45,10 @@ export const addHotel = async (
 
 export const getAllHotels = async () => {
   try {
-    const hotels = await db.select().from(hotelsTable);
+    const hotels = await db
+      .select()
+      .from(hotelsTable)
+      .orderBy(desc(hotelsTable.createdAt));
     return hotels;
   } catch (error) {
     console.error("Error fetching hotels:", error);
@@ -59,9 +62,9 @@ export const getHotel = async (id: number) => {
       .select()
       .from(hotelsTable)
       .where(eq(hotelsTable.id, id))
-      .limit(1); // Limit to 1 result
+      .limit(1);
 
-    console.log("Fetched hotel:", currentHotel); // Debug log
+    console.log("Fetched hotel:", currentHotel);
 
     return currentHotel[0] || null;
   } catch (error) {
@@ -86,11 +89,11 @@ export const AddUser = async (userId: string, email_address: string) => {
       });
     } else {
       console.log("User already exists.");
-      return null; // or throw a custom error
+      return null;
     }
   } catch (error) {
     console.error("Error during adding user:", error);
-    throw new Error("Failed to add user."); // or return a response indicating failure
+    throw new Error("Failed to add user.");
   }
 };
 

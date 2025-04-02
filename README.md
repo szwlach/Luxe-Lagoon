@@ -16,6 +16,7 @@ The project is built using:
 ## Features
 
 - **Browse hotels** – access luxury offers with pricing, maximum guest capacity, and location details.
+- **Search hotels** – use the search bar to find hotels by name or location.
 - **Hotel booking** – book a hotel after logging in.
 - **All-inclusive option** – an additional charge based on the number of guests.
 - **Booking calendar** – select stay dates with automatic price calculation.
