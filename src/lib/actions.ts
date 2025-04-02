@@ -7,7 +7,7 @@ import {
   usersTable,
 } from "@/db/schema";
 import { createClient } from "@supabase/supabase-js";
-import { and, desc, eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 // Create Supabase client using environment variables
 const supabase = createClient(
@@ -45,10 +45,7 @@ export const addHotel = async (
 
 export const getAllHotels = async () => {
   try {
-    const hotels = await db
-      .select()
-      .from(hotelsTable)
-      .orderBy(desc(hotelsTable.createdAt));
+    const hotels = await db.select().from(hotelsTable);
     return hotels;
   } catch (error) {
     console.error("Error fetching hotels:", error);
